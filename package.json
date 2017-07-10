@@ -1,5 +1,5 @@
 {
-  "name": "express-cassandra",
+  "name": "tyb-express-cassandra",
   "version": "1.9.0",
   "dependencies": {
     "async": "^1.0.0",
@@ -27,10 +27,7 @@
     "vows": "^0.8.1"
   },
   "optionalDependencies": {},
-  "author": {
-    "name": "Mahafuzur Rahman",
-    "url": "https://www.codinglogs.com"
-  },
+  "author": "Mahafuzur Rahman (https://www.codinglogs.com)",
   "scripts": {
     "test": "babel src -d lib && mocha --bail --compilers js:babel-register && eslint src",
     "build": "babel src -d lib",
@@ -45,7 +42,6 @@
     "url": "git://github.com/masumsoft/express-cassandra.git"
   },
   "main": "lib/expressCassandra.js",
-  "readmeFilename": "README.md",
   "homepage": "https://github.com/masumsoft/express-cassandra",
   "bugs": {
     "url": "https://github.com/masumsoft/express-cassandra/issues"
@@ -67,5 +63,9 @@
     "javascript",
     "js"
   ],
-  "engine": "node >= 0.10.x"
+  "engine": "node >= 0.10.x",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  }
 }
