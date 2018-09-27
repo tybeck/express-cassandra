@@ -2102,6 +2102,14 @@ BaseModel.delete = function f(queryObject, options, callback) {
       throw (buildError('model.delete.before.error', error));
     }
 
+    const _events = BaseModel.getEvents();
+
+    if (_events && _events.fire) {
+
+      _events.fire('delete', query, queryParams);
+
+    }
+
     this._execute_table_query(query, queryParams, queryOptions, (err, results) => {
       if (typeof callback === 'function') {
         if (err) {
@@ -2135,6 +2143,15 @@ BaseModel.truncate = function f(callback) {
   const tableName = properties.table_name;
 
   const query = util.format('TRUNCATE TABLE "%s";', tableName);
+
+  const _events = BaseModel.getEvents();
+
+  if (_events && _events.fire) {
+
+    _events.fire('truncate', query, []);
+
+  }
+
   this._execute_definition_query(query, [], callback);
 };
 
@@ -2361,6 +2378,14 @@ BaseModel.prototype.save = function fn(options, callback) {
     if (options.ttl) query += util.format(' USING TTL %s', options.ttl);
 
     query += ';';
+
+    const _events = BaseModel.getEvents();
+
+    if (_events && _events.fire) {
+
+      _events.fire('insert', query, queryParams);
+
+    }
 
     this.constructor._execute_table_query(query, queryParams, queryOptions, (err, result) => {
       if (typeof callback === 'function') {
