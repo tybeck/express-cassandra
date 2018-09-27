@@ -76,6 +76,14 @@ BaseModel._properties = {
   schema: null,
 };
 
+BaseModel.getEvents = function () {
+  const client = require('../expressCassandra');
+  if (client && client.getEvents) {
+    return client.getEvents();
+  }
+  return null;
+};
+
 BaseModel._set_properties = function f(properties) {
   const schema = properties.schema;
   const tableName = schema.table_name || properties.name;
@@ -1969,6 +1977,14 @@ BaseModel.update = function f(queryObject, updateValues, options, callback) {
   }
 
   query += ';';
+
+    const _events = BaseModel.getEvents();
+
+    if (_events && _events.fire) {
+
+      _events.fire('update', query, queryParams);
+
+    }
 
     this._execute_table_query(query, queryParams, queryOptions, (err, results) => {
       if (typeof callback === 'function') {

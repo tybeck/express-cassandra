@@ -288,4 +288,12 @@ CassandraClient.prototype.minTimeuuid = CassandraClient.minTimeuuid;
 
 CassandraClient.prototype._translateFileNameToModelName = CassandraClient._translateFileNameToModelName;
 
+const CassandraEvents = require('./eventsCassandra');
+
+CassandraClient.events = new CassandraEvents();
+
+CassandraClient.getEvents = function () {
+  return CassandraClient.events;
+};
+
 module.exports = CassandraClient;
